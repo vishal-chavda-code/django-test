@@ -94,7 +94,8 @@ Please do the following, in order, in the project root:
      - streamlit run streamlit_apps/dashboard1.py --server.port 8501
      - streamlit run streamlit_apps/dashboard2.py --server.port 8502
      - python manage.py runserver 8000
-   On Windows you can just run `run.bat`. On macOS/Linux `./run.sh`.
+   On Windows PowerShell run `.\run.ps1`, on Windows cmd run `run.bat`,
+   on macOS/Linux run `./run.sh`.
 6. Once all three are up, confirm by hitting:
      - http://localhost:8000/           (Django home)
      - http://localhost:8000/plotly/    (Plotly dashboard)
@@ -148,10 +149,20 @@ python manage.py migrate
 
 ### Run all three servers
 
-**Windows:**
-```bash
+**Windows — PowerShell:**
+```powershell
+.\run.ps1
+```
+*(If PowerShell blocks the script, run this once per session first:
+`Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned`)*
+
+**Windows — cmd.exe:**
+```cmd
 run.bat
 ```
+
+> ⚠️ In PowerShell, type `.\run.bat` (with the leading `.\`). PowerShell
+> won't run scripts from the current directory without it.
 
 **macOS / Linux:**
 ```bash
