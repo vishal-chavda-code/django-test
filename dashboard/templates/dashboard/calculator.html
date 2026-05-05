@@ -1,0 +1,101 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block title %}Tools · DjangoVibe{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="page-eyebrow">Page 4 · Tools</div>
+    <h1 class="page-title grad-text">Multi-Tool Lab</h1>
+    <p class="page-sub">Three calculators powered by client-side JavaScript, plus a Text Analyzer that round-trips through Django for real server-side Python computation. Same page, full Django range.</p>
+</section>
+
+<div class="calc-shell">
+    <div class="calc-tabs">
+        <button class="calc-tab {% if active_tab == 'loan' %}active{% endif %}" data-target="loan">Loan</button>
+        <button class="calc-tab {% if active_tab == 'tip' %}active{% endif %}" data-target="tip">Tip Split</button>
+        <button class="calc-tab {% if active_tab == 'bmi' %}active{% endif %}" data-target="bmi">BMI</button>
+        <button class="calc-tab {% if active_tab == 'analyzer' %}active{% endif %}" data-target="analyzer">Text Analyzer<span class="tab-badge">server</span></button>
+    </div>
+
+    <!-- Loan -->
+    <div class="calc-panel {% if active_tab == 'loan' %}active{% endif %}" id="panel-loan">
+        <div class="calc-fields">
+            <label><span>Loan amount ($)</span><input type="number" id="loan-amount" value="25000" min="0" step="100" /></label>
+            <label><span>Annual rate (%)</span><input type="number" id="loan-rate" value="6.5" min="0" step="0.1" /></label>
+            <label><span>Term (years)</span><input type="number" id="loan-term" value="5" min="1" step="1" /></label>
+        </div>
+        <div class="calc-result">
+            <div class="calc-result-row"><span>Monthly payment</span><strong id="loan-monthly">—</strong></div>
+            <div class="calc-result-row"><span>Total paid</span><strong id="loan-total">—</strong></div>
+            <div class="calc-result-row"><span>Total interest</span><strong id="loan-interest">—</strong></div>
+        </div>
+    </div>
+
+    <!-- Tip -->
+    <div class="calc-panel {% if active_tab == 'tip' %}active{% endif %}" id="panel-tip">
+        <div class="calc-fields">
+            <label><span>Bill ($)</span><input type="number" id="tip-bill" value="84.50" min="0" step="0.01" /></label>
+            <label><span>Tip (%)</span><input type="number" id="tip-percent" value="18" min="0" step="1" /></label>
+            <label><span>Split between</span><input type="number" id="tip-people" value="3" min="1" step="1" /></label>
+        </div>
+        <div class="calc-result">
+            <div class="calc-result-row"><span>Tip amount</span><strong id="tip-amount">—</strong></div>
+            <div class="calc-result-row"><span>Total bill</span><strong id="tip-total">—</strong></div>
+            <div class="calc-result-row"><span>Per person</span><strong id="tip-each">—</strong></div>
+        </div>
+    </div>
+
+    <!-- BMI -->
+    <div class="calc-panel {% if active_tab == 'bmi' %}active{% endif %}" id="panel-bmi">
+        <div class="calc-fields">
+            <label><span>Height (cm)</span><input type="number" id="bmi-height" value="175" min="50" step="1" /></label>
+            <label><span>Weight (kg)</span><input type="number" id="bmi-weight" value="72" min="20" step="0.1" /></label>
+        </div>
+        <div class="calc-result">
+            <div class="calc-result-row"><span>BMI</span><strong id="bmi-value">—</strong></div>
+            <div class="calc-result-row"><span>Category</span><strong id="bmi-category">—</strong></div>
+        </div>
+    </div>
+
+    <!-- Text Analyzer (server-side, classic Django form POST) -->
+    <div class="calc-panel {% if active_tab == 'analyzer' %}active{% endif %}" id="panel-analyzer">
+        <p class="analyzer-note">Submit any text. Django receives the POST, runs the analysis in pure Python on the server, and renders the results below — no JavaScript involved in the math.</p>
+        <form method="post" action="{% url 'dashboard:calculator' %}#panel-analyzer" class="analyzer-form">
+            {% csrf_token %}
+            <textarea name="analyzer_text" rows="6" placeholder="Paste a paragraph or two of text and press Analyze...">{% if analysis %}{{ analysis.submitted_text }}{% endif %}</textarea>
+            <button type="submit" class="btn btn-primary analyzer-submit">Analyze on the server →</button>
+        </form>
+
+        {% if analysis %}
+        <div class="analyzer-results">
+            <div class="kpi-row">
+                <div class="kpi"><div class="kpi-num">{{ analysis.word_count }}</div><div class="kpi-label">words</div></div>
+                <div class="kpi"><div class="kpi-num">{{ analysis.chars_total }}</div><div class="kpi-label">chars</div></div>
+                <div class="kpi"><div class="kpi-num">{{ analysis.sentence_count }}</div><div class="kpi-label">sentences</div></div>
+                <div class="kpi"><div class="kpi-num">{{ analysis.paragraph_count }}</div><div class="kpi-label">paragraphs</div></div>
+                <div class="kpi"><div class="kpi-num">{{ analysis.unique_words }}</div><div class="kpi-label">unique</div></div>
+                <div class="kpi"><div class="kpi-num">{{ analysis.reading_minutes }}m</div><div class="kpi-label">read time</div></div>
+            </div>
+            <div class="calc-result">
+                <div class="calc-result-row"><span>Avg word length</span><strong>{{ analysis.avg_word_len }} chars</strong></div>
+                <div class="calc-result-row"><span>Longest word</span><strong>{{ analysis.longest_word }}</strong></div>
+                <div class="calc-result-row"><span>Chars (no spaces)</span><strong>{{ analysis.chars_no_spaces }}</strong></div>
+            </div>
+            {% if analysis.top_words %}
+            <h4 class="topwords-title">Top words (excluding stop-words)</h4>
+            <div class="topwords">
+                {% for word, count in analysis.top_words %}
+                <div class="topword"><span class="topword-text">{{ word }}</span><span class="topword-count">{{ count }}</span></div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'dashboard/js/calculator.js' %}"></script>
+{% endblock %}

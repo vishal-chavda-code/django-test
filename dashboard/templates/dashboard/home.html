@@ -1,0 +1,75 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Home · DjangoVibe{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-eyebrow">Django × Streamlit × Plotly</div>
+    <h1 class="hero-title">
+        Data dashboards,<br />
+        <span class="grad-text">drenched in deep vibe.</span>
+    </h1>
+    <p class="hero-sub">
+        A four-page demo built on the classic <strong>Iris</strong> Kaggle dataset.
+        Django serves the front end. Streamlit and Plotly do the dataviz.
+        Every line of logic — front to back — is pure Python.
+    </p>
+    <div class="hero-cta">
+        <a href="{% url 'dashboard:plotly' %}" class="btn btn-primary">Open Plotly Dashboard →</a>
+        <a href="{% url 'dashboard:calculator' %}" class="btn btn-ghost">Try the Calculator</a>
+    </div>
+</section>
+
+<section class="card-grid">
+    <a href="{% url 'dashboard:plotly' %}" class="card card--plotly">
+        <div class="card-tag">Page 1 · Plotly</div>
+        <h3 class="card-title">Iris Visual Lab</h3>
+        <p class="card-body">Interactive scatter, box, violin & density plots rendered server-side from a pandas DataFrame.</p>
+        <div class="card-arrow">→</div>
+    </a>
+    <a href="{% url 'dashboard:streamlit_one' %}" class="card card--st1">
+        <div class="card-tag">Page 2 · Streamlit</div>
+        <h3 class="card-title">Iris Explorer</h3>
+        <p class="card-body">A live Streamlit app with sliders, filters, and species drill-down — embedded inside Django.</p>
+        <div class="card-arrow">→</div>
+    </a>
+    <a href="{% url 'dashboard:streamlit_two' %}" class="card card--st2">
+        <div class="card-tag">Page 3 · Streamlit</div>
+        <h3 class="card-title">Gapminder Pulse</h3>
+        <p class="card-body">A second Streamlit dashboard with year sliders, animated bubbles and continent filters.</p>
+        <div class="card-arrow">→</div>
+    </a>
+    <a href="{% url 'dashboard:calculator' %}" class="card card--calc">
+        <div class="card-tag">Page 4 · Tool</div>
+        <h3 class="card-title">Multi Calculator</h3>
+        <p class="card-body">Loan, tip, BMI and unit conversions — three rich calculators in one page.</p>
+        <div class="card-arrow">→</div>
+    </a>
+</section>
+
+<section class="stack-block">
+    <h2 class="section-title">The stack — every layer is Python</h2>
+    <div class="stack-grid">
+        <div class="stack-pill">
+            <div class="stack-pill-num">01</div>
+            <div class="stack-pill-name">Django</div>
+            <div class="stack-pill-desc">Renders pages & routes</div>
+        </div>
+        <div class="stack-pill">
+            <div class="stack-pill-num">02</div>
+            <div class="stack-pill-name">pandas</div>
+            <div class="stack-pill-desc">Loads & shapes the CSV</div>
+        </div>
+        <div class="stack-pill">
+            <div class="stack-pill-num">03</div>
+            <div class="stack-pill-name">Plotly</div>
+            <div class="stack-pill-desc">Server-rendered charts</div>
+        </div>
+        <div class="stack-pill">
+            <div class="stack-pill-num">04</div>
+            <div class="stack-pill-name">Streamlit</div>
+            <div class="stack-pill-desc">Interactive dashboards</div>
+        </div>
+    </div>
+</section>
+{% endblock %}

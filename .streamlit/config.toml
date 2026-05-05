@@ -1,0 +1,19 @@
+# Streamlit theme — matches the Django site's deep-vibe palette.
+# Loaded automatically by streamlit when running from this project root.
+[theme]
+base = "dark"
+primaryColor = "#ff0080"
+backgroundColor = "#07041a"
+secondaryBackgroundColor = "#14082e"
+textColor = "#f0f0ff"
+font = "sans serif"
+
+[server]
+headless = true
+runOnSave = false
+# Allow the Django site (port 8000) to embed these dashboards as iframes.
+enableCORS = false
+enableXsrfProtection = false
+
+[browser]
+gatherUsageStats = false

@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Plotly Dashboard · DjangoVibe{% endblock %}
+
+{% block content %}
+<section class="page-head">
+    <div class="page-eyebrow">Page 1 · Plotly</div>
+    <h1 class="page-title grad-text">Iris Visual Lab</h1>
+    <p class="page-sub">All charts below are built in Python with Plotly and rendered into the page server-side. No client JS framework — just Django templates dropping the chart HTML inline.</p>
+</section>
+
+<div class="kpi-row">
+    <div class="kpi"><div class="kpi-num">{{ stats.rows }}</div><div class="kpi-label">rows</div></div>
+    <div class="kpi"><div class="kpi-num">{{ stats.species_count }}</div><div class="kpi-label">species</div></div>
+    <div class="kpi"><div class="kpi-num">{{ stats.avg_sepal }}</div><div class="kpi-label">avg sepal cm</div></div>
+    <div class="kpi"><div class="kpi-num">{{ stats.avg_petal }}</div><div class="kpi-label">avg petal cm</div></div>
+</div>
+
+<div class="chart-grid">
+    <div class="chart-card chart-card--wide">{{ charts.scatter|safe }}</div>
+    <div class="chart-card">{{ charts.box|safe }}</div>
+    <div class="chart-card">{{ charts.violin|safe }}</div>
+    <div class="chart-card chart-card--wide">{{ charts.density|safe }}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Django Demo · Deep Vibe{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}" />
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <div class="aurora"></div>
+    <div class="aurora aurora--alt"></div>
+
+    <nav class="nav">
+        <a class="brand" href="{% url 'dashboard:home' %}">
+            <span class="brand-glyph">◆</span>
+            <span class="brand-name">DJANGO<span class="brand-accent">VIBE</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="{% url 'dashboard:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+            <a href="{% url 'dashboard:plotly' %}" class="nav-link {% if request.resolver_match.url_name == 'plotly' %}active{% endif %}">Plotly</a>
+            <a href="{% url 'dashboard:streamlit_one' %}" class="nav-link {% if request.resolver_match.url_name == 'streamlit_one' %}active{% endif %}">Streamlit I</a>
+            <a href="{% url 'dashboard:streamlit_two' %}" class="nav-link {% if request.resolver_match.url_name == 'streamlit_two' %}active{% endif %}">Streamlit II</a>
+            <a href="{% url 'dashboard:calculator' %}" class="nav-link {% if request.resolver_match.url_name == 'calculator' %}active{% endif %}">Calculator</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <span>Built with Django + Plotly + Streamlit · 100% Python</span>
+    </footer>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>
