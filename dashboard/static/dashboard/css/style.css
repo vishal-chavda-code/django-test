@@ -413,6 +413,19 @@ body {
     .chart-card--wide { grid-column: auto; }
 }
 
+.open-direct {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    color: var(--mint);
+    text-decoration: none;
+    border: 1px solid rgba(6, 255, 165, 0.4);
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+.open-direct:hover { background: rgba(6, 255, 165, 0.1); }
+
 /* ---------- Streamlit iframe wrap ---------- */
 .iframe-wrap {
     position: relative;

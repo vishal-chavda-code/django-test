@@ -7,6 +7,10 @@
     <div class="page-eyebrow">Page 2 · Streamlit</div>
     <h1 class="page-title grad-text">Iris Explorer</h1>
     <p class="page-sub">Live Streamlit app embedded as an iframe. Streamlit runs as its own Python process on port 8501 — Django just hosts the page and points to it.</p>
+    <p class="page-sub" style="margin-top:14px;">
+        Iframe blank? Streamlit takes ~5 sec to start.
+        <a href="{{ STREAMLIT_DASHBOARD_1_URL }}" target="_blank" rel="noopener" class="open-direct">Open directly →</a>
+    </p>
 </section>
 
 <div class="iframe-wrap">
@@ -17,11 +21,5 @@
         loading="lazy"
         allow="fullscreen"
     ></iframe>
-    <div class="iframe-fallback">
-        <strong>Streamlit not running?</strong>
-        Start it with:
-        <code>streamlit run streamlit_apps/dashboard1.py --server.port 8501</code>
-        or run <code>run.bat</code> in the project root to launch everything.
-    </div>
 </div>
 {% endblock %}

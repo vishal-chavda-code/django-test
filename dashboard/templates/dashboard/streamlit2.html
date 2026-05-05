@@ -7,6 +7,10 @@
     <div class="page-eyebrow">Page 3 · Streamlit</div>
     <h1 class="page-title grad-text">Gapminder Pulse</h1>
     <p class="page-sub">A second Streamlit dashboard on a different dataset, served from port 8502. Two Streamlit apps, one Django front end — all Python.</p>
+    <p class="page-sub" style="margin-top:14px;">
+        Iframe blank? Streamlit takes ~5 sec to start.
+        <a href="{{ STREAMLIT_DASHBOARD_2_URL }}" target="_blank" rel="noopener" class="open-direct">Open directly →</a>
+    </p>
 </section>
 
 <div class="iframe-wrap">
@@ -17,11 +21,5 @@
         loading="lazy"
         allow="fullscreen"
     ></iframe>
-    <div class="iframe-fallback">
-        <strong>Streamlit not running?</strong>
-        Start it with:
-        <code>streamlit run streamlit_apps/dashboard2.py --server.port 8502</code>
-        or run <code>run.bat</code> in the project root to launch everything.
-    </div>
 </div>
 {% endblock %}
